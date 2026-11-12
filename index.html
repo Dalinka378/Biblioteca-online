@@ -1,117 +1,43 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Biblioteca Online</title>
-<style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
---bg:#faf6ef;--card:#fff;--tx:#2a2118;--mut:#7a6d5e;--br:#e8dfd0;--ac:#8c3b1e;--acx:#fff;--hd:#3b2a1e}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130f;--card:#221c16;--tx:#f1e8da;--mut:#a89a88;--br:#3a3027;--ac:#e0875a;--acx:#1a120c;--hd:#0f0c09}}
-:root[data-theme="dark"]{--bg:#17130f;--card:#221c16;--tx:#f1e8da;--mut:#a89a88;--br:#3a3027;--ac:#e0875a;--acx:#1a120c;--hd:#0f0c09}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Georgia,"Times New Roman",serif;min-height:100vh}
-header{background:var(--hd);color:#f6ecdc;padding:14px 16px}
-.hi{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.logo{font-size:1.35rem;font-weight:700;margin-right:auto}
-nav{display:flex;gap:6px}
-nav button{background:none;border:1px solid #6a5444;color:#f6ecdc;border-radius:999px;padding:6px 14px;font:inherit;font-size:.9rem;cursor:pointer}
-nav button.on{background:#f6ecdc;color:#3b2a1e}
-.hero{max-width:1000px;margin:0 auto;padding:28px 16px 8px}
-.hero h1{margin:0 0 6px;font-size:1.9rem}
-.hero p{margin:0;color:var(--mut)}
-.tools{max-width:1000px;margin:14px auto 0;padding:0 16px}
-.tools input{width:100%;padding:12px 14px;border:1px solid var(--br);border-radius:10px;background:var(--card);color:var(--tx);font:inherit}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.chips button{border:1px solid var(--br);background:var(--card);color:var(--tx);border-radius:999px;padding:5px 13px;font:inherit;font-size:.88rem;cursor:pointer}
-.chips button.on{background:var(--ac);color:var(--acx);border-color:var(--ac)}
-main{max-width:1000px;margin:0 auto;padding:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
-.bk{background:var(--card);border:1px solid var(--br);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.cv{height:130px;padding:14px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;position:relative}
-.cv b{font-size:1.02rem;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,.3)}
-.cv span{font-size:.78rem;opacity:.9}
-.fv{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.25);border:0;color:#fff;border-radius:50%;width:30px;height:30px;font-size:16px;cursor:pointer}
-.bd{padding:12px;display:flex;flex-direction:column;gap:6px;flex:1}
-.bd small{color:var(--mut)}
-.bd p{margin:0;font-size:.88rem;color:var(--mut);flex:1}
-.bd .row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px}
-.st{font-size:.8rem;color:var(--mut)}
-.bt{background:var(--ac);color:var(--acx);border:0;border-radius:8px;padding:7px 12px;font:inherit;font-size:.85rem;cursor:pointer}
-.bt.g{background:none;border:1px solid var(--ac);color:var(--ac)}
-.bt:disabled{opacity:.45;cursor:default}
-.emp{text-align:center;color:var(--mut);padding:40px 0}
-.due{color:var(--ac);font-size:.82rem}
-footer{text-align:center;color:var(--mut);font-size:.85rem;padding:24px 16px}
-#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--hd);color:#f6ecdc;padding:10px 18px;border-radius:10px;opacity:0;transition:opacity .25s;pointer-events:none;font-size:.9rem}
-#toast.on{opacity:1}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biblioteca Online</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header><div class="hi"><div class="logo">📚 Biblioteca Online</div>
-<nav><button id="n1" class="on">Catalog</button><button id="n2">Cărțile mele (<span id="cnt">0</span>)</button><button id="n3">Favorite</button></nav></div></header>
-<div class="hero"><h1 id="ttl">Descoperă cărți</h1><p id="sub">Caută în catalog, împrumută pe 14 zile și păstrează-ți lista de favorite.</p></div>
-<div class="tools" id="tools"><input id="q" type="search" placeholder="Caută după titlu sau autor…"><div class="chips" id="chips"></div></div>
-<main><div class="grid" id="g"></div></main>
-<footer>© Biblioteca Online · proiect demonstrativ</footer>
-<div id="toast"></div>
-<script>
-const B=[
-[1,"Povestea lui Harap-Alb","Ion Creangă","Basme",1877,"Basmul cult al drumului inițiatic: un fiu de crai pornește spre împărăție și își găsește tovarăși neobișnuiți.",3],
-[2,"Amintiri din copilărie","Ion Creangă","Proză",1881,"Copilăria la Humulești, spusă cu umor și grai moldovenesc.",4],
-[3,"Poezii","Mihai Eminescu","Poezie",1884,"Luceafărul, Scrisorile și poeziile de dragoste ale poetului național.",5],
-[4,"Sărmanul Dionis","Mihai Eminescu","Proză",1872,"Nuvelă fantastică despre timp, vis și identitate.",2],
-[5,"O scrisoare pierdută","I. L. Caragiale","Teatru",1884,"Comedie politică despre o scrisoare compromițătoare într-un oraș de provincie.",3],
-[6,"Momente și schițe","I. L. Caragiale","Proză",1901,"Scene scurte și ironice din viața mahalalei și a funcționarilor.",3],
-[7,"Ion","Liviu Rebreanu","Roman",1920,"Pământul și setea de avere într-un sat ardelean.",2],
-[8,"Pădurea spânzuraților","Liviu Rebreanu","Roman",1922,"Drama unui ofițer prins între datorie și conștiință pe front.",2],
-[9,"Moara cu noroc","Ioan Slavici","Proză",1881,"Nuvelă despre lăcomie și destinul unei familii de cârciumari.",4],
-[10,"Ciocoii vechi și noi","Nicolae Filimon","Roman",1863,"Ascensiunea unui parvenit în societatea fanariotă.",1],
-[11,"Poezii","George Coșbuc","Poezie",1893,"Poezia satului, a muncii și a baladelor populare.",3],
-[12,"Maitreyi","Mircea Eliade","Roman",1933,"Dragostea dintre un european și o tânără bengaleză.",2],
-[13,"Hamlet","William Shakespeare","Teatru",1603,"Tragedia prințului Danemarcei și a răzbunării.",4],
-[14,"Micul prinț","Antoine de Saint-Exupéry","Basme",1943,"Un pilot întâlnește pe un prinț venit de pe o planetă mică.",5],
-[15,"Divina Comedie","Dante Alighieri","Poezie",1320,"Călătoria prin Infern, Purgatoriu și Paradis.",2],
-[16,"Crimă și pedeapsă","Feodor Dostoievski","Roman",1866,"Vina și remușcarea unui student sărac după o crimă.",3]
-];
-const COL={Basme:"#b45f3a",Proză:"#4f7a5a",Poezie:"#7a5a8c",Teatru:"#a8453f",Roman:"#3f6a8c"};
-let S={loans:{},favs:[]},view=1,cat="Toate",q="";
-try{S=Object.assign(S,JSON.parse(localStorage.getItem("bib")||"{}"))}catch(e){}
-const sv=()=>{try{localStorage.setItem("bib",JSON.stringify(S))}catch(e){}};
-function toast(t){const e=document.getElementById("toast");e.textContent=t;e.className="on";setTimeout(()=>e.className="",1800)}
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
-function due(id){return new Date(S.loans[id]).toLocaleDateString("ro-RO")}
-function chips(){
- const cs=["Toate",...new Set(B.map(b=>b[3]))];
- document.getElementById("chips").innerHTML=cs.map(c=>`<button class="${c===cat?"on":""}" data-c="${c}">${c}</button>`).join("");
- document.querySelectorAll("#chips button").forEach(b=>b.onclick=()=>{cat=b.dataset.c;render()});
-}
-function render(){
- document.getElementById("cnt").textContent=Object.keys(S.loans).length;
- ["n1","n2","n3"].forEach((n,i)=>document.getElementById(n).className=view===i+1?"on":"");
- document.getElementById("tools").style.display=view===1?"block":"none";
- document.getElementById("ttl").textContent=["Descoperă cărți","Cărțile mele","Cărți favorite"][view-1];
- document.getElementById("sub").textContent=["Caută în catalog, împrumută pe 14 zile și păstrează-ți lista de favorite.","Cărțile împrumutate și termenul de returnare.","Cărțile pe care le-ai marcat cu inimă."][view-1];
- chips();
- let l=B.filter(b=>view===1?(cat==="Toate"||b[3]===cat)&&(b[1]+" "+b[2]).toLowerCase().includes(q):view===2?S.loans[b[0]]:S.favs.includes(b[0]));
- const g=document.getElementById("g");
- if(!l.length){g.innerHTML='<div class="emp" style="grid-column:1/-1">Nicio carte găsită.</div>';return}
- g.innerHTML=l.map(b=>{const id=b[0],ln=!!S.loans[id],f=S.favs.includes(id);
-  return `<div class="bk"><div class="cv" style="background:${COL[b[3]]}"><span>${b[3]} · ${b[4]}</span><b>${esc(b[1])}</b><button class="fv" data-f="${id}" title="Favorite">${f?"♥":"♡"}</button></div>
-  <div class="bd"><small>${esc(b[2])}</small><p>${esc(b[5])}</p>${ln?`<span class="due">Returnează până la ${due(id)}</span>`:`<span class="st">${b[6]} exemplare disponibile</span>`}
-  <div class="row">${ln?`<button class="bt g" data-r="${id}">Returnează</button>`:`<button class="bt" data-b="${id}">Împrumută</button>`}</div></div></div>`}).join("");
- g.querySelectorAll("[data-b]").forEach(x=>x.onclick=()=>{const id=+x.dataset.b;
-  if(Object.keys(S.loans).length>=5){toast("Poți împrumuta maximum 5 cărți");return}
-  S.loans[id]=Date.now()+14*864e5;sv();toast("Carte împrumutată pe 14 zile");render()});
- g.querySelectorAll("[data-r]").forEach(x=>x.onclick=()=>{delete S.loans[+x.dataset.r];sv();toast("Carte returnată");render()});
- g.querySelectorAll("[data-f]").forEach(x=>x.onclick=()=>{const id=+x.dataset.f,i=S.favs.indexOf(id);i<0?S.favs.push(id):S.favs.splice(i,1);sv();render()});
-}
-document.getElementById("q").oninput=e=>{q=e.target.value.toLowerCase();render()};
-document.getElementById("n1").onclick=()=>{view=1;render()};
-document.getElementById("n2").onclick=()=>{view=2;render()};
-document.getElementById("n3").onclick=()=>{view=3;render()};
-render();
-</script>
+  <header>
+    <div class="hi">
+      <a class="logo" href="index.html">📚 Biblioteca Online</a>
+      <nav>
+        <button data-view="catalog" class="on">Catalog</button>
+        <button data-view="imprumuturi">Cărțile mele (<span id="cnt">0</span>)</button>
+        <button data-view="favorite">Favorite</button>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1 id="ttl">Descoperă cărți</h1>
+    <p id="sub">Caută în catalog, împrumută pe 14 zile și păstrează-ți lista de favorite.</p>
+  </div>
+
+  <div class="tools" id="tools">
+    <input id="q" type="search" placeholder="Caută după titlu sau autor…">
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <main>
+    <div class="grid" id="g"></div>
+  </main>
+
+  <footer>© Biblioteca Online · proiect demonstrativ</footer>
+  <div id="toast"></div>
+
+  <script src="js/common.js"></script>
+  <script src="js/books.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

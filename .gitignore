@@ -1,6 +1,6 @@
-config.local.php
 *.tmp
 *.log
 cache/
-vendor/
+node_modules/
 .DS_Store
+.vscode/
