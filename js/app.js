@@ -50,7 +50,7 @@ function bookCard(b) {
     <article class="bk">
       <div class="cv" style="background:${GENRE_COLORS[b.genre] || "#666"}">
         <span>${b.genre} · ${b.year}</span>
-        <b>${esc(b.title)}</b>
+          <b><a href="carte.html?id=${b.id}">${esc(b.title)}</a></b>
         <button class="fv" data-fav="${b.id}" title="Favorite" aria-label="Favorite">${fav ? "♥" : "♡"}</button>
       </div>
       <div class="bd">
