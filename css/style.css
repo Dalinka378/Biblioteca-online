@@ -139,3 +139,17 @@ footer a { color: var(--ac); }
   opacity: 0; transition: opacity .25s; pointer-events: none; font-size: .9rem;
 }
 #toast.on { opacity: 1; }
+
+/* ===== Pagina cărții ===== */
+
+.cv b a { color: inherit; text-decoration: none; }
+.cv b a:hover { text-decoration: underline; }
+.back { color: var(--ac); display: inline-block; margin: 8px 0 16px; }
+.det { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 720px) { .det { grid-template-columns: 1fr; } }
+.cv.big { height: 340px; border-radius: 12px; font-size: 1.3rem; }
+.info-carte h1 { margin: 0; font-size: 1.8rem; }
+.info-carte .autor { margin: 4px 0 16px; color: var(--mut); font-size: 1.1rem; }
+.info-carte table { border-collapse: collapse; margin-bottom: 12px; }
+.info-carte th { text-align: left; color: var(--mut); font-weight: normal; padding: 4px 16px 4px 0; }
+.info-carte .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
