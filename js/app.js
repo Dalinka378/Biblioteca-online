@@ -13,6 +13,15 @@ let state = loadState();
 let view = VIEWS[location.hash.slice(1)] ? location.hash.slice(1) : "catalog";
 let genre = "Toate";
 let query = "";
+let sort = "title";
+
+// Funcțiile de comparare pentru fiecare opțiune din lista „Sortează”
+const SORTS = {
+  title:  (a, b) => a.title.localeCompare(b.title, "ro"),
+  author: (a, b) => a.author.localeCompare(b.author, "ro"),
+  new:    (a, b) => b.year - a.year,
+  old:    (a, b) => a.year - b.year
+};
 
 function dueDate(id) {
   return new Date(state.loans[id]).toLocaleDateString("ro-RO");
@@ -37,10 +46,12 @@ function renderChips() {
 function filteredBooks() {
   if (view === "imprumuturi") return BOOKS.filter(b => state.loans[b.id]);
   if (view === "favorite") return BOOKS.filter(b => state.favs.includes(b.id));
-  return BOOKS.filter(b =>
-    (genre === "Toate" || b.genre === genre) &&
-    (b.title + " " + b.author).toLowerCase().includes(query)
-  );
+  return BOOKS
+    .filter(b =>
+      (genre === "Toate" || b.genre === genre) &&
+      (b.title + " " + b.author).toLowerCase().includes(query)
+    )
+    .sort(SORTS[sort]);
 }
 
 function bookCard(b) {
@@ -69,6 +80,10 @@ function bookCard(b) {
 }
 
 function render() {
+  document.getElementById("sort").addEventListener("change", e => {
+  sort = e.target.value;
+  render();
+});
   document.getElementById("cnt").textContent = Object.keys(state.loans).length;
   document.querySelectorAll("nav [data-view]").forEach(btn => {
     btn.className = btn.dataset.view === view ? "on" : "";
