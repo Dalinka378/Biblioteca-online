@@ -25,9 +25,15 @@
   </div>
 
   <div class="tools" id="tools">
-    <input id="q" type="search" placeholder="Caută după titlu sau autor…">
-    <div class="chips" id="chips"></div>
-  </div>
+    <div class="search-row">
+      <input id="q" type="search" placeholder="Caută după titlu sau autor…">
+      <select id="sort" aria-label="Sortează">
+        <option value="title">Titlu (A–Z)</option>
+        <option value="author">Autor (A–Z)</option>
+        <option value="new">An (cele mai noi)</option>
+        <option value="old">An (cele mai vechi)</option>
+      </select>
+    </div>
 
   <main>
     <div class="grid" id="g"></div>
