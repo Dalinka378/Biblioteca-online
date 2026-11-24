@@ -1,8 +1,5 @@
 // ===== Pagina de detalii a unei cărți (carte.html?id=3) =====
 
-const MAX_LOANS = 5;
-const LOAN_DAYS = 14;
-
 let state = loadState();
 const id = Number(new URLSearchParams(location.search).get("id"));
 const book = BOOKS.find(b => b.id === id);

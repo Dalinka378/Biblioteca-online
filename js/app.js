@@ -1,8 +1,5 @@
 // ===== Pagina principală: catalog, împrumuturi, favorite =====
 
-const MAX_LOANS = 5;
-const LOAN_DAYS = 14;
-
 const VIEWS = {
   catalog:     { title: "Descoperă cărți", sub: "Caută în catalog, împrumută pe 14 zile și păstrează-ți lista de favorite." },
   imprumuturi: { title: "Cărțile mele",    sub: "Cărțile împrumutate și termenul de returnare." },
