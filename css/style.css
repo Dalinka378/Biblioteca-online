@@ -143,3 +143,13 @@ footer a { color: var(--ac); }
 /* Contorul de caractere (Issue #7) */
 .contact .counter { align-self: flex-end; color: var(--mut); font-size: .78rem; }
 .contact .counter.warn { color: var(--err); font-weight: bold; }
+
+/* Ștergerea mesajelor (Issue #8) */
+.sent-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.sent-head h2 { margin: 0; }
+.sent li { position: relative; padding-right: 40px; }
+.del {
+  position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border: 0; border-radius: 50%;
+  background: none; color: var(--mut); cursor: pointer; font-size: .9rem;
+}
+.del:hover { background: var(--err); color: #fff; }
