@@ -139,3 +139,7 @@ footer a { color: var(--ac); }
   opacity: 0; transition: opacity .25s; pointer-events: none; font-size: .9rem;
 }
 #toast.on { opacity: 1; }
+
+/* Contorul de caractere (Issue #7) */
+.contact .counter { align-self: flex-end; color: var(--mut); font-size: .78rem; }
+.contact .counter.warn { color: var(--err); font-weight: bold; }
