@@ -82,6 +82,14 @@ main { max-width: 1000px; width: 100%; margin: 0 auto; padding: 16px; flex: 1; }
 .cv { height: 130px; padding: 14px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
 .cv b { font-size: 1.02rem; line-height: 1.2; text-shadow: 0 1px 2px rgba(0,0,0,.3); padding-right: 30px; }
 .cv span { font-size: .78rem; opacity: .9; }
+/* Coperți ilustrate (img/<id>.svg) */
+.bk .cv.img { height: 160px; }
+.cv.img::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,0) 55%, rgba(0,0,0,.35));
+}
+.cv span, .cv b { position: relative; z-index: 1; }
+.fv { z-index: 2; }
 .fv {
   position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,.25); border: 0; color: #fff;
   border-radius: 50%; width: 30px; height: 30px; font-size: 16px; cursor: pointer;
