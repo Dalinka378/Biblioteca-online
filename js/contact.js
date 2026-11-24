@@ -37,11 +37,38 @@ function renderMessages() {
   if (!state.messages.length) { box.hidden = true; return; }
   box.hidden = false;
   box.querySelector("ul").innerHTML = state.messages
-    .slice()
+    .map((m, i) => `
+      <li>
+        <button class="del" data-del="${i}" title="Șterge mesajul" aria-label="Șterge mesajul">✕</button>
+        <small>${esc(m.name)} · ${new Date(m.date).toLocaleString("ro-RO")}</small>${esc(m.message)}
+      </li>`)
     .reverse()
-    .map(m => `<li><small>${esc(m.name)} · ${new Date(m.date).toLocaleString("ro-RO")}</small>${esc(m.message)}</li>`)
     .join("");
 }
+
+// Ștergerea unui mesaj din listă
+function deleteMessage(index) {
+  state.messages.splice(index, 1);
+  saveState(state);
+  renderMessages();
+  toast("Mesajul a fost șters");
+}
+
+// Ștergerea tuturor mesajelor
+function deleteAllMessages() {
+  if (!confirm("Sigur vrei să ștergi toate mesajele?")) return;
+  state.messages = [];
+  saveState(state);
+  renderMessages();
+  toast("Toate mesajele au fost șterse");
+}
+
+document.getElementById("sent").addEventListener("click", e => {
+  const btn = e.target.closest("[data-del]");
+  if (btn) deleteMessage(Number(btn.dataset.del));
+});
+
+document.getElementById("delAll").addEventListener("click", deleteAllMessages);
 
 form.querySelectorAll("input, textarea").forEach(input => {
   input.addEventListener("blur", () => checkField(input));
