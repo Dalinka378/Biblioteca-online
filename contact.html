@@ -36,7 +36,8 @@
           <span class="msg"></span>
         </label>
         <label>Mesaj
-          <textarea name="message" rows="5" placeholder="Mesajul tău"></textarea>
+          <textarea name="message" rows="5" maxlength="500" placeholder="Mesajul tău"></textarea>
+          <span class="counter" id="counter">0 / 500</span>
           <span class="msg"></span>
         </label>
         <button type="submit" class="bt">Trimite</button>
@@ -51,7 +52,10 @@
     </div>
 
     <section class="sent" id="sent" hidden>
-      <h2>Mesajele tale trimise</h2>
+      <div class="sent-head">
+        <h2>Mesajele tale trimise</h2>
+        <button type="button" class="bt g" id="delAll">Șterge toate</button>
+      </div>
       <ul></ul>
     </section>
   </main>
