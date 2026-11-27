@@ -1,11 +1,13 @@
 // ===== Pagina principală: catalog, împrumuturi, favorite =====
 
 const VIEWS = {
-  catalog:     { title: "Descoperă cărți", sub: "Caută în catalog, împrumută pe 14 zile și păstrează-ți lista de favorite." },
-  imprumuturi: { title: "Cărțile mele",    sub: "Cărțile împrumutate și termenul de returnare." },
-  favorite:    { title: "Cărți favorite",  sub: "Cărțile pe care le-ai marcat cu inimă." }
+  catalog:     { title: "Descoperă cărți", sub: "Caută în catalog, împrumută pe 14 zile și păstrează-ți lista de favorite.",
+                 empty: "Nicio carte găsită. Încearcă alt cuvânt sau alt gen." },
+  imprumuturi: { title: "Cărțile mele",    sub: "Cărțile împrumutate și termenul de returnare.",
+                 empty: "Nu ai împrumutat nicio carte. Alege una din Catalog." },
+  favorite:    { title: "Cărți favorite",  sub: "Cărțile pe care le-ai marcat cu inimă.",
+                 empty: "Nu ai cărți favorite încă. Apasă ♡ pe o carte ca s-o adaugi aici." }
 };
-
 let state = loadState();
 let view = VIEWS[location.hash.slice(1)] ? location.hash.slice(1) : "catalog";
 let genre = "Toate";
