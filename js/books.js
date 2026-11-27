@@ -28,3 +28,6 @@ const GENRE_COLORS = {
   "Teatru": "#a8453f",
   "Roman": "#3f6a8c"
 };
+
+// Coperta ilustrată a fiecărei cărți: img/<id>.svg
+BOOKS.forEach(b => { b.cover = `img/${b.id}.svg`; });

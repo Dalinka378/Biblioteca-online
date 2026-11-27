@@ -3,6 +3,10 @@
 // Datele se păstrează în browser (localStorage), fără server.
 const STORAGE_KEY = "bib";
 
+// Regulile de împrumut, folosite de index.html și carte.html
+const MAX_LOANS = 5;
+const LOAN_DAYS = 14;
+
 function loadState() {
   const implicit = { loans: {}, favs: [], messages: [] };
   try {
