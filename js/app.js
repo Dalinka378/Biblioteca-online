@@ -1,8 +1,5 @@
 // ===== Pagina principală: catalog, împrumuturi, favorite =====
 
-const MAX_LOANS = 5;
-const LOAN_DAYS = 14;
-
 const VIEWS = {
   catalog:     { title: "Descoperă cărți", sub: "Caută în catalog, împrumută pe 14 zile și păstrează-ți lista de favorite." },
   imprumuturi: { title: "Cărțile mele",    sub: "Cărțile împrumutate și termenul de returnare." },
@@ -48,9 +45,9 @@ function bookCard(b) {
   const fav = state.favs.includes(b.id);
   return `
     <article class="bk">
-      <div class="cv" style="background:${GENRE_COLORS[b.genre] || "#666"}">
+      <div class="cv img" style="background:${GENRE_COLORS[b.genre] || "#666"} url(${b.cover}) center / cover">
         <span>${b.genre} · ${b.year}</span>
-        <b>${esc(b.title)}</b>
+        <b><a href="carte.html?id=${b.id}">${esc(b.title)}</a></b>
         <button class="fv" data-fav="${b.id}" title="Favorite" aria-label="Favorite">${fav ? "♥" : "♡"}</button>
       </div>
       <div class="bd">
