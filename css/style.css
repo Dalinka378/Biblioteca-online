@@ -66,6 +66,12 @@ nav a.on { background: #f6ecdc; color: #3b2a1e; }
   width: 100%; padding: 12px 14px; border: 1px solid var(--br); border-radius: 10px;
   background: var(--card); color: var(--tx); font: inherit;
 }
+.search-row { display: flex; gap: 8px; }
+.search-row input { flex: 1; min-width: 0; }
+.search-row select {
+  padding: 0 10px; border: 1px solid var(--br); border-radius: 10px;
+  background: var(--card); color: var(--tx); font: inherit; font-size: .9rem;
+}
 .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
 .chips button {
   border: 1px solid var(--br); background: var(--card); color: var(--tx);
