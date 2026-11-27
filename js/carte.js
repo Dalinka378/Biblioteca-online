@@ -9,7 +9,7 @@ function render() {
   const box = document.getElementById("det");
 
   if (!book) {
-    box.innerHTML = '<div class="emp">Cartea nu a fost găsită.</div>';
+    box.innerHTML = `<div class="emp">${VIEWS[view].empty}</div>`;
     return;
   }
 
