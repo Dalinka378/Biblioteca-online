@@ -148,6 +148,9 @@ footer a { color: var(--ac); }
 }
 #toast.on { opacity: 1; }
 
+/* Contorul de caractere (Issue #7) */
+.contact .counter { align-self: flex-end; color: var(--mut); font-size: .78rem; }
+.contact .counter.warn { color: var(--err); font-weight: bold; }
 /* ===== Pagina cărții ===== */
 
 .cv b a { color: inherit; text-decoration: none; }
